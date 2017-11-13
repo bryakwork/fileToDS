@@ -13,13 +13,11 @@ $cacheConfig = [
 $aggregator = new ConfigAggregator([
     \Zend\Filter\ConfigProvider::class,
     \Zend\Cache\ConfigProvider::class,
-    \Zend\Mail\ConfigProvider::class,
     \Zend\Session\ConfigProvider::class,
     \rollun\test\ConfigProvider::class,
     \rollun\actionrender\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
-
     // Default App module config
 
     // Load application config in a pre-defined order in such a way that local settings
@@ -29,7 +27,6 @@ $aggregator = new ConfigAggregator([
     //   - `local.php`
     //   - `*.local.php`
     new PhpFileProvider('config/autoload/{{,*.}global,{,*.}local}.php'),
-
     // Load development config if it exists
     new PhpFileProvider('config/development.config.php'),
 ], $cacheConfig['config_cache_path']);
