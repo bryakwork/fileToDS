@@ -1,12 +1,3 @@
-# zaboy-skeleton
-
----
-## [Оглавление](https://github.com/rollun-com/rollun-skeleton/blob/master/docs/Contents.md)
-
----
-
-Каркас для создания приложений. 
-
-* [Стандарты](https://github.com/rollun-com/rollun-skeleton/blob/master/docs/Standarts.md)
-
-* [Quickstart](https://github.com/avz-cmf/saas/blob/master/docs/Quickstart.md)
+# file2ds
+Модуль, позволяющий записывать содержимое `.csv` файлов в [rollun/DataStoresInterface](https://github.com/rollun-com/rollun-datastore/blob/master/src/DataStore/src/DataStore/Interfaces/DataStoresInterface.php)
+`DataStore`'ы, испорльзуя `zend-expressive`. Инструкцию можно найти [здесь]().

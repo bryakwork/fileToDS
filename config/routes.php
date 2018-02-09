@@ -40,18 +40,7 @@ if ($container->has('api-datastore')) {
 if ($container->has('webhookActionRender')) {
     $app->route('/webhook[/{resourceName}]', 'webhookActionRender', ['GET', 'POST'], 'webhook');
 }
-if ($container->has('loginPageAR')) {
-    $app->route('/login', 'loginPageAR', ['GET', 'POST'], 'login-page');
+if ($container->has("file2DS")) {
+    $app->route('/file2ds[/{resourceName}]', "file2DS", ['POST', 'OPTIONS'], 'fileToDS');
 }
-if ($container->has('loginServiceAR')) {
-    $app->route('/login/{resourceName}', 'loginServiceAR', ['GET', 'POST'], 'login-service');
-}
-if ($container->has('loginPrepareServiceAR')) {
-    $app->route('/login_prepare/{resourceName}', 'loginPrepareServiceAR', ['GET', 'POST'], 'login-prepare-service');
-}
-if ($container->has('logoutAR')) {
-    $app->route('/logout', 'logoutAR', ['GET', 'POST'], 'logout');
-}
-if ($container->has('user-page')) {
-    $app->route('/user', 'user-page', ['GET', 'POST'], 'user-page');
-}
+

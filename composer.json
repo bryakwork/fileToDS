@@ -1,6 +1,6 @@
 {
-  "name": "rollun-com/rollun-skeleton",
-  "description": "Skeleton for app or lib",
+  "name": "bryakwork/file2ds",
+  "description": "Upload data from .csv files to rollun-datastore/DataStoresInterface DataStores ",
   "minimum-stability": "stable",
   "license": "proprietary",
   "type": "project",

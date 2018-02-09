@@ -9,7 +9,11 @@
 namespace rollun\file2ds;
 
 
-
+use rollun\actionrender\Installers\ActionRenderInstaller;
+use rollun\actionrender\Installers\BasicRenderInstaller;
+use rollun\datastore\DataStore\Installers\CacheableInstaller;
+use rollun\datastore\DataStore\Installers\CsvInstaller;
+use rollun\datastore\DataStore\Installers\MemoryInstaller;
 use rollun\datastore\Middleware\ResourceResolver;
 use rollun\file2ds\Middleware\Factory\File2DSMiddlewarefactory;
 use rollun\file2ds\Middleware\File2DSMiddleware;
@@ -106,5 +110,16 @@ class File2DSInstaller extends InstallerAbstract
                 $description = "No description";
         }
         return $description;
+    }
+
+    public function getDependencyInstallers()
+    {
+        return [
+            CsvInstaller::class,
+            MemoryInstaller::class,
+            ActionRenderInstaller::class,
+            BasicRenderInstaller::class,
+            CacheableInstaller::class,
+        ];
     }
 }
