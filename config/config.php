@@ -11,10 +11,11 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Zend\I18n\ConfigProvider::class,
+    \Zend\Validator\ConfigProvider::class,
     \Zend\Filter\ConfigProvider::class,
     \Zend\Cache\ConfigProvider::class,
     \Zend\Session\ConfigProvider::class,
-    \rollun\test\ConfigProvider::class,
     \rollun\actionrender\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
