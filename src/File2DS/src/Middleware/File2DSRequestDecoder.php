@@ -28,7 +28,10 @@ class File2DSRequestDecoder implements MiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $delimeter = $request->getParsedBody()['delimeter'];
-        $request = $request->withAttribute('file2DSDelimeter', $delimeter);
+        /** var Zend\Diactoros\UploadedFile $fileObject */
+        $fileObject = ($request->getUploadedFiles())['file'];
+        $request = $request->withAttribute('file2DSDelimeter', $delimeter)
+                            ->withAttribute('uploadedFile', $fileObject);
         $response = $delegate->process($request);
         return $response;
     }
