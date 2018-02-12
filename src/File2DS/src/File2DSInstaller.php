@@ -14,7 +14,6 @@ use rollun\actionrender\Installers\BasicRenderInstaller;
 use rollun\datastore\DataStore\Installers\CacheableInstaller;
 use rollun\datastore\DataStore\Installers\CsvInstaller;
 use rollun\datastore\DataStore\Installers\MemoryInstaller;
-use rollun\datastore\Middleware\ResourceResolver;
 use rollun\file2ds\Middleware\Factory\File2DSMiddlewarefactory;
 use rollun\file2ds\Middleware\File2DSMiddleware;
 use rollun\file2ds\Middleware\File2DSRequestDecoder;
@@ -33,13 +32,12 @@ class File2DSInstaller extends InstallerAbstract
             'action_render_service' => [
                 'file2DS' => [
                     'action_middleware_service' => 'file2DSAction',
-                    'render_middleware_service' => 'dataStoreHtmlJsonRendererLLPipe',
+                    'render_middleware_service' => 'simpleHtmlJsonRendererLLPipe',
                 ],
             ],
             'middleware_pipe_abstract' => [
                 'file2DSAction' => [
                     'middlewares' => [
-                        ResourceResolver::class,
                         File2DSRequestDecoder::class,
                         'file2dsLLPipe',
                     ],
@@ -47,14 +45,12 @@ class File2DSInstaller extends InstallerAbstract
             ],
             'LazyLoadPipe' => [
                 'file2dsLLPipe' => LazyLoadFile2DSMiddlewareGetter::class,
-                'dataStoreHtmlJsonRendererLLPipe' => 'dataStoreHtmlJsonRenderer',
             ],
             'dependencies' => [
                 'factories' => [
                     File2DSMiddleware::class => File2DSMiddlewarefactory::class,
                 ],
                 'invokables' => [
-                    ResourceResolver::class => ResourceResolver::class,
                     File2DSRequestDecoder::class => File2DSRequestDecoder::class,
                     LazyLoadFile2DSMiddlewareGetter::class => LazyLoadFile2DSMiddlewareGetter::class,
                 ],
@@ -84,9 +80,7 @@ class File2DSInstaller extends InstallerAbstract
             isset($config['action_render_service']['file2DS']) &&
             isset($config['middleware_pipe_abstract']['file2DSAction']['middlewares']) &&
             isset($config['LazyLoadPipe']['file2dsLLPipe']) &&
-            isset($config['LazyLoadPipe']['dataStoreHtmlJsonRendererLLPipe']) &&
             isset($config['dependencies']['factories'][File2DSMiddleware::class]) &&
-            isset($config['dependencies']['invokables'][ResourceResolver::class]) &&
             isset($config['dependencies']['invokables'][File2DSRequestDecoder::class]) &&
             isset($config['dependencies']['invokables'][LazyLoadFile2DSMiddlewareGetter::class])
         );
